@@ -13,10 +13,14 @@ public class JornadaMilhasContext: DbContext
 {
     public DbSet<OfertaViagem> OfertasViagem { get; set; }
     public DbSet<Rota> Rotas { get; set; }
+    public DateTime Timestamp { get; }
 
     public JornadaMilhasContext() { }
 
-    public JornadaMilhasContext(DbContextOptions<JornadaMilhasContext> options) : base(options) { }
+    public JornadaMilhasContext(DbContextOptions<JornadaMilhasContext> options) : base(options)
+    {
+        Timestamp = DateTime.Now;
+    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
