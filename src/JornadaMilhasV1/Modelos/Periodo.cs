@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,11 +8,11 @@ using JornadaMilhasV1.Validador;
 
 namespace JornadaMilhasV1.Modelos;
 
+
 public class Periodo: Valida
 {
     public DateTime DataInicial { get; set; }
     public DateTime DataFinal { get; set; }
-    public OfertaViagem OfertaViagem { get; set; }
 
     public Periodo(DateTime dataInicial, DateTime dataFinal)
     {

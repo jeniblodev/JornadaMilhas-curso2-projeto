@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace JornadaMilhas.Dados;
-internal class OfertaViagemDAL
+public class OfertaViagemDAL
 {
     private readonly JornadaMilhasContext context;
 

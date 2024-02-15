@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ public abstract class Valida : IValidavel
 {
     private readonly Erros erros = new();
     public bool EhValido => erros.Count() == 0;
+    [NotMapped]
     public Erros Erros => erros;
     protected abstract void Validar();
 }
