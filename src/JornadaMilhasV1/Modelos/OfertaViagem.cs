@@ -34,6 +34,10 @@ public class OfertaViagem: Valida
         }
     }
 
+    public OfertaViagem()
+    {
+
+    }
 
     public OfertaViagem(Rota rota, Periodo periodo, double preco)
     {

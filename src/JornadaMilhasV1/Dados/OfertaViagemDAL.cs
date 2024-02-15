@@ -43,4 +43,13 @@ internal class OfertaViagemDAL
         context.OfertasViagem.Remove(oferta);
         context.SaveChanges();
     }
+
+    public OfertaViagem RecuperaMaiorDesconto(Func<OfertaViagem, bool> filtro)
+    {
+        return context.OfertasViagem
+            .Where(filtro)
+            .Where(o => o.Ativa)
+            .OrderBy(o => o.Preco)
+            .FirstOrDefault();
+    }
 }

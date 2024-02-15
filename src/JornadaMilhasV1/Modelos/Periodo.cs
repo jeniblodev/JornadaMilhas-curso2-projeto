@@ -11,6 +11,7 @@ public class Periodo: Valida
 {
     public DateTime DataInicial { get; set; }
     public DateTime DataFinal { get; set; }
+    public OfertaViagem OfertaViagem { get; set; }
 
     public Periodo(DateTime dataInicial, DateTime dataFinal)
     {
