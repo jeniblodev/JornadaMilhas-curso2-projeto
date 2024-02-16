@@ -5,24 +5,19 @@ using Xunit.Abstractions;
 
 namespace JornadaMilhas.Test.Integracao;
 
-public class OfertaViagemDalAdicionar: IClassFixture<ContextoFixture>
+[Collection(nameof(ContextoCollection))]
+public class OfertaViagemDalAdicionar
 {
     private readonly OfertaViagemDAL dal;
     private readonly ITestOutputHelper output;
 
+
     public OfertaViagemDalAdicionar(ITestOutputHelper output, ContextoFixture fixture)
     {
-/*        var options = new DbContextOptionsBuilder<JornadaMilhasContext>()
-        .UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=JornadaMilhas;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False")
-        .Options;
-
-        var context = new JornadaMilhasContext(options);*/
         dal = new OfertaViagemDAL(fixture.Context);
         this.output = output;
 
-        /*output.WriteLine(context.Timestamp.ToString());*/
-
-        output.WriteLine(fixture.Context.Timestamp.ToString());
+        output.WriteLine(fixture.Context.GetHashCode().ToString());
     }
 
     [Fact]
