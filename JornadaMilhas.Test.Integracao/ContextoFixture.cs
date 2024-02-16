@@ -24,6 +24,7 @@ public class ContextoFixture: IAsyncLifetime
         .Options;
 
         Context = new JornadaMilhasContext(options);
+        Context.Database.Migrate();
     }
 
     public async Task DisposeAsync()
