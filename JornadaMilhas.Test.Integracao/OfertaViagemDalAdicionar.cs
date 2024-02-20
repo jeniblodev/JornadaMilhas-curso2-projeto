@@ -11,11 +11,6 @@ public class OfertaViagemDalAdicionar
 {
     private readonly OfertaViagemDAL dal;
     private readonly ITestOutputHelper output;
-    private static readonly Faker faker = new Faker();
-    private static readonly Rota rota = new Rota(faker.Address.City(), faker.Address.City());
-    private static readonly Periodo periodo = new Periodo(faker.Date.Between(new DateTime(2022, 1, 1), new DateTime(2025, 12, 31)),
-                                  faker.Date.Between(new DateTime(2025, 1, 1), new DateTime(2026, 12, 31)));
-    private static readonly double preco = faker.Random.Double(100, 1000);
 
 
     public OfertaViagemDalAdicionar(ITestOutputHelper output, ContextoFixture fixture)
@@ -24,6 +19,19 @@ public class OfertaViagemDalAdicionar
         this.output = output;
 
         output.WriteLine(fixture.Context.GetHashCode().ToString());
+
+        InserirDadosNoBanco();
+    }
+
+    private void InserirDadosNoBanco()
+    {
+        var faker = new Faker();
+        var rota = new Rota(faker.Address.City(), faker.Address.City());
+        var periodo = new Periodo(faker.Date.Between(new DateTime(2022, 1, 1), new DateTime(2025, 12, 31)),
+                                  faker.Date.Between(new DateTime(2025, 1, 1), new DateTime(2026, 12, 31)));
+        var preco = faker.Random.Double(100, 1000);
+
+        dal.Adicionar(new OfertaViagem(rota, periodo, preco));
     }
 
     [Fact]
