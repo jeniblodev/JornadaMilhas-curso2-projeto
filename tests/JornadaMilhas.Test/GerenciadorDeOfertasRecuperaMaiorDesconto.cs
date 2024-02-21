@@ -25,17 +25,25 @@ public class GerenciadorDeOfertasRecuperaMaiorDesconto
         Assert.Null(oferta);
     }
 
+    public class PeriodoFaker : Faker<Periodo>
+    {
+        public PeriodoFaker(DateTime? inicio = default)
+        {
+            CustomInstantiator(f =>
+            {
+                DateTime dataInicio = inicio ?? f.Date.Soon();
+                return new Periodo(dataInicio, dataInicio.AddDays(30));
+            });
+        }
+    }
+
+
     [Fact]
     // destino = são paulo, desconto = 40, preco = 80
     public void RetornaOfertaEspecificaQuandoDestinoSaoPauloEDesconto40()
     {
         //arrange
-        var fakerPeriodo = new Faker<Periodo>()
-            .CustomInstantiator(f =>
-            {
-                DateTime dataInicio = f.Date.Soon();
-                return new Periodo(dataInicio, dataInicio.AddDays(30));
-            });
+        var fakerPeriodo = new PeriodoFaker(new DateTime(2024,10,31));
 
         var rota = new Rota("Curitiba", "São Paulo");
 

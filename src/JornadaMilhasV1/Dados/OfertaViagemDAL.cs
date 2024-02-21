@@ -22,10 +22,14 @@ public class OfertaViagemDAL
         context.SaveChanges();
     }
 
-    public OfertaViagem RecuperarPorId(int id)
+    public OfertaViagem? RecuperarPorId(int id)
     {
         return context.OfertasViagem.FirstOrDefault(o => o.Id == id);
     }
+
+    public IEnumerable<OfertaViagem>? RecuperarPor(Func<OfertaViagem, bool> predicate) => 
+        context.OfertasViagem.Where(predicate);
+
 
     public IEnumerable<OfertaViagem> RecuperarTodas()
     {
@@ -44,7 +48,7 @@ public class OfertaViagemDAL
         context.SaveChanges();
     }
 
-    public OfertaViagem RecuperaMaiorDesconto(Func<OfertaViagem, bool> filtro)
+    public OfertaViagem? RecuperaMaiorDesconto(Func<OfertaViagem, bool> filtro)
     {
         return context.OfertasViagem
             .Where(filtro)
