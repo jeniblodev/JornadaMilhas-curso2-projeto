@@ -25,6 +25,30 @@ public class ContextoFixture: IAsyncLifetime
 
         Context = new JornadaMilhasContext(options);
         Context.Database.Migrate();
+
+        
+        
+        // inicializar o respawn
+    }
+
+    public async Task LimparDadosBanco()
+    {
+        Context.OfertasViagem.RemoveRange( Context.OfertasViagem );
+        Context.Rotas.RemoveRange(Context.Rotas);
+
+        await Context.SaveChangesAsync();
+
+        // ou...
+        Context.Database.ExecuteSqlRaw("DELETE FROM OfertasViagem");
+        Context.Database.ExecuteSqlRaw("DELETE FROM Rotas");
+
+        // ou...
+        var connection = new Microsoft.Data.SqlClient.SqlConnection(_mssqlContainer.GetConnectionString());
+        var deleteSql = connection.CreateCommand();
+        deleteSql.CommandText = "DELETE FROM OfertasViagem";
+        deleteSql.ExecuteNonQuery();
+
+
     }
 
     public async Task DisposeAsync()
